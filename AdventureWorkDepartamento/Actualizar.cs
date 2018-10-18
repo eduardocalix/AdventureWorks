@@ -17,23 +17,21 @@ namespace AdventureWorkDepartamento
         {
             InitializeComponent();
         }
-        
+        // Crear la conexión
+        SqlConnection conn = new SqlConnection(@"server = (local);
+                integrated security = true; database = AdventureWorks2014;");
+
 
         private void btnActualizar_Click(object sender, EventArgs e)
         {
 
-            // Crear la conexión
-            SqlConnection conn = new SqlConnection(@"server = (local);
-                  integrated security = true; database = AdventureWorks2014;");
-
-            // DML Modificacion 
-        
-            string sqlAct = @"UPDATE HumanResources.Department SET (Name=@name,GroupName=@nameGroup,ModifiedDate=@date)
-                              WHERE @Id=DepartmentID";
+            
+           
+            //llamar al storeProcedure y la conexion 
+            SqlCommand cmd = new SqlCommand("sp_actualizarDepartamentos", conn);
 
             // Crear el comando
-            SqlCommand cmd = new SqlCommand(sqlAct, conn);
-
+            cmd.CommandType = CommandType.StoredProcedure;
             try
             {
                 // Establecer la conexión
@@ -44,16 +42,15 @@ namespace AdventureWorkDepartamento
                     // Reemplazar los parámetros por los valores del formulario
                     cmd.Parameters.Add("@Id", SqlDbType.SmallInt).Value = txtId.Text;
                     cmd.Parameters.Add("@name", SqlDbType.NChar).Value = txtNombre.Text;
-                    cmd.Parameters.Add("@nameGroup", SqlDbType.NVarChar).Value = txtGrupo.Text;
+                    cmd.Parameters.Add("@groupName", SqlDbType.NVarChar).Value = txtGrupo.Text;
                     cmd.Parameters.Add("@date", SqlDbType.DateTime).Value = dtpFechaModificacion.Value;
 
-                    // Ejecutar el query de inserción
-                    cmd.ExecuteNonQuery();
-
-                    // Mostrar mensaje satisfactorio al usuario
-                    lblEstado.Text = "¡Nueva grupo Actualizado satisfactoriamente!";
-                    Limpiar();
+                    // Ejecutar el query de Actualizacion
+                    cmd.ExecuteNonQuery();                   
                 }
+                // Mostrar mensaje satisfactorio al usuario
+                lblEstado.Text = "¡Grupo Actualizado satisfactoriamente!";
+                Limpiar();
             }
             catch (SqlException ex)
             {
@@ -74,6 +71,8 @@ namespace AdventureWorkDepartamento
             lblEstado.Text = "";
             dtpFechaModificacion.Text = "";
             txtId.Focus();
+            txtId.Enabled = true;
+
         }
 
         private void btnLimpiar_Click(object sender, EventArgs e)
@@ -96,8 +95,7 @@ namespace AdventureWorkDepartamento
         {
             int id = Convert.ToInt16 (txtId.Text);
             // DML Modificacion 
-            SqlConnection conn = new SqlConnection(@"server = (local);
-                integrated security = true; database = AdventureWorks2014;");
+           
             string sqlBus = @"SELECT Name,GroupName,ModifiedDate FROM HumanResources.Department
                                 WHERE DepartmentID =  '" + id + "';";
 
@@ -110,9 +108,9 @@ namespace AdventureWorkDepartamento
                 {
                     txtNombre.Text = dr.GetString(0);
                     txtGrupo.Text = dr.GetString(1);
-                    dtpFechaModificacion.Text = dr.GetString(2);
+                    dtpFechaModificacion.Text = Convert.ToString(dr.GetDateTime(2));
                 }
-            
+                txtId.Enabled = false;
             }
             catch (SqlException ex)
             {

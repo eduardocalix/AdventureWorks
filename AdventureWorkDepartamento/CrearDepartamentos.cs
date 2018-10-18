@@ -21,13 +21,14 @@ namespace AdventureWorkDepartamento
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+           
             // Crear la conexión
             SqlConnection conn = new SqlConnection(@"server = (local);
                 integrated security = true; database = AdventureWorks2014;");
 
             // Crear el comando
  
-            SqlCommand cmd = new SqlCommand("SP_InsertarArea", conn);
+            SqlCommand cmd = new SqlCommand("sp_crearDepartamentos", conn);
             cmd.CommandType = CommandType.StoredProcedure;
             try
             {
@@ -38,14 +39,15 @@ namespace AdventureWorkDepartamento
                     cmd.Parameters["@name"].Value = txtNombre.Text;
                     cmd.Parameters.Add(new SqlParameter("@groupName", SqlDbType.NVarChar,50));
                     cmd.Parameters["@groupName"].Value = txtGrupo.Text;
-                    cmd.Parameters.Add(new SqlParameter("@date", SqlDbType.Date));
-                    cmd.Parameters["@date"].Value = dtpFechaModificacion.Text;
+                    cmd.Parameters.Add(new SqlParameter("@date", SqlDbType.DateTime));
+                    cmd.Parameters["@date"].Value = dtpFechaModificacion.Value;
                     cmd.ExecuteNonQuery();
   
-                    // Mostrar mensaje satisfactorio al usuario
-                    lblEstado.Text = "¡Nuevo grupo agregado satisfactoriamente!";
-                    Limpiar();
+                  
                 }
+                // Mostrar mensaje satisfactorio al usuario
+                lblEstado.Text = "¡Nuevo grupo agregado satisfactoriamente!";
+                Limpiar();
             }
             catch (SqlException ex)
             {
