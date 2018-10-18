@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace AdventureWorkDepartamento
 {
-    public partial class Form1 : Form
+    public partial class frmOperaciones : Form
     {
-        public Form1()
+        public frmOperaciones()
         {
             InitializeComponent();
         }
@@ -31,7 +31,14 @@ namespace AdventureWorkDepartamento
 
         private void button4_Click(object sender, EventArgs e)
         {
+            frmEliminarDepartamentos frmEliminar = new frmEliminarDepartamentos();
+            frmEliminar.ShowDialog();
+        }
 
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            frmActualizar actualizar = new frmActualizar();
+            actualizar.ShowDialog();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace AdventureWorkDepartamento
 {
-    partial class Form1
+    partial class frmOperaciones
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -30,8 +30,8 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnActualizar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -54,35 +54,36 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // btnActualizar
             // 
-            this.button3.Location = new System.Drawing.Point(32, 127);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(182, 54);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Actualizar";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnActualizar.Location = new System.Drawing.Point(32, 127);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(182, 54);
+            this.btnActualizar.TabIndex = 2;
+            this.btnActualizar.Text = "Actualizar";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
             // 
-            // button4
+            // btnEliminar
             // 
-            this.button4.Location = new System.Drawing.Point(251, 127);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(182, 54);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Eliminar Departamentos";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnEliminar.Location = new System.Drawing.Point(251, 127);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(182, 54);
+            this.btnEliminar.TabIndex = 3;
+            this.btnEliminar.Text = "Eliminar Departamentos";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.button4_Click);
             // 
-            // Form1
+            // frmOperaciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 243);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(464, 228);
+            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
+            this.Name = "frmOperaciones";
             this.Text = "OperacionesCRUD con departamentos con AdventureWorks";
             this.ResumeLayout(false);
 
@@ -92,8 +93,8 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnActualizar;
+        private System.Windows.Forms.Button btnEliminar;
     }
 }
 
